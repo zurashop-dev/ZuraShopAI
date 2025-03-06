@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Nama Lu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Halaman Home -->
+    <div class="home">
+    <!-- Container untuk Get Started -->
+<div class="star"></div>
+<div class="star"></div>
+<div class="star"></div>
+<div class="star"></div>
+<div class="star"></div>
+<div class="star"></div>
+<div class="star"></div>
+<div class="star"></div>
+<div class="star"></div>
+<div class="star"></div>
+<div class="get-started-container">
+    <!-- Ucapan Selamat Datang -->
+    <h2 class="welcome-text">Welcome Di Payment Nama Lu</h2>
+
+    <!-- Detail Petunjuk -->
+    <p class="detail-text">
+        Sertakan Bukti Transfer Dan Send Foto Transfer dengan keaslian dan kirim ke penjual
+    </p>
+
+    <!-- Tombol Get Started -->
+    <button class="get-started-btn" onclick="startPayment()">Payment</button>
+
+    <!-- Tombol Owner -->
+    <button class="owner-btn" onclick="contactOwner()">Owner</button>
+    
+    <!-- Tombol Saluran -->
+    <button class="saluran-btn" onclick="linkchanel()">Saluran</button>
+</div>
+        <!-- Container Utama (disembunyikan dulu) -->
+        <div class="payment-container" style="display: none;">
+            <h2 class="payment-title">Pilih Metode Pembayaran</h2>
+
+            <!-- Opsi Pembayaran -->
+            <div class="payment-card">
+                <img src="https://img12.pixhost.to/images/535/570961693_zerodev.jpg" alt="DANA">
+                <h2 class="payment-name">DANA</h2>
+                <button class="copy-btn" onclick="copyText('08XXX')">Salin</button>
+            </div>
+
+            <div class="payment-card">
+                <img src="https://img12.pixhost.to/images/535/570961460_zerodev.jpg" alt="OVO">
+                <h2 class="payment-name">OVO</h2>
+                <button class="copy-btn" onclick="copyText('08XXX')">Salin</button>
+            </div>
+
+            <div class="payment-card">
+                <img src="https://img12.pixhost.to/images/535/570962698_zerodev.jpg" alt="GOPAY">
+                <h2 class="payment-name">GOPAY</h2>
+                <button class="copy-btn" onclick="copyText('08XXX')">Salin</button>
+            </div>
+
+            <div class="payment-card">
+                <img src="https://images.seeklogo.com/logo-png/39/1/quick-response-code-indonesia-standard-qris-logo-png_seeklogo-391791.png" alt="QRISS">
+                <h2 class="payment-name">QRIS</h2>
+                <button class="qris-btn" onclick="viewQRIS()">QRIS</button>
+            </div>
+            
+      <h2>Information signal</h2>
+    <div class="box">
+        <p><b>IPV4:</b> <span id="ipv4">Loading...</span></p>
+         <p><b>Sinyal:</b> <span id="signal">Tidak tersedia</span></p>
+    </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">Powered By Lim Hosting - 2025
+        </footer>
+    </div>
+
+    <script>
+        // Fetch IPV4 dari API eksternal
+        async function getIPV4() {
+            try {
+                let response = await fetch('https://api64.ipify.org?format=json');
+                let data = await response.json();
+                document.getElementById("ipv4").textContent = data.ip;
+            } catch (error) {
+                document.getElementById("ipv4").textContent = "Gagal mendapatkan IP";
+            }
+        }
+
+        // Cek sinyal jika browser mendukung API Network Information
+        function getSignalStrength() {
+            if ('connection' in navigator) {
+                let connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+                let signalText = `(${connection.effectiveType.toUpperCase()}) ${connection.downlink} Mbps`;
+                document.getElementById("signal").textContent = signalText;
+            } else {
+                document.getElementById("signal").textContent = "Browser tidak mendukung";
+            }
+        }
+
+        getIPV4();
+        getSignalStrength();
+        
+    //Contact Owner
+    function contactOwner() {
+    window.location.href = 'https://wa.me/6283176194095'; // Ganti dengan nomor WhatsApp Owner
+}
+
+//Saluran WhatsApp 
+function linkchanel() {
+    window.location.href = 'https://whatsapp.com/channel/-'; // Ganti dengan Link Chanel
+}
+        // Fungsi untuk menyalin teks
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert(text + " berhasil disalin!");
+            });
+        }
+
+        // Fungsi melihat QRIS (simulasi)
+        function viewQRIS() {
+            window.location.href = 'https://example.com/image/qris'; //Qriss Url yang udah dijadikan foto
+        }
+
+        // Fungsi menampilkan pembayaran setelah klik "Get Started"
+        function startPayment() {
+            document.querySelector('.get-started-container').style.display = 'none';
+            document.querySelector('.payment-container').style.display = 'block';
+        }
+    </script>
+
+</body>
+</html>
